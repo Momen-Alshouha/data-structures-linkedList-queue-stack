@@ -16,28 +16,28 @@ public:
 	}
 
 	void SetCurrent(_ptrNode currentNode) {
-		return _currentNode = currentNode;
+		_currentNode = currentNode;
 	}
 
 	__declspec(property(get = GetCurrent, put = SetCurrent)) _ptrNode current;
 
-private:
 
-	_ptrNode _currentNode;
-
-	_ptrNode next(_ptrNode haed) {
-		if (!_currentNode)
+	_ptrNode next(_ptrNode head) {
+		if (_currentNode && _currentNode->next!=head)
 		{
-			if (_currentNode==head) // to break circular linked list and avoid infinite circular loop
-			{
-				return nullptr;
-			}
-			_currentNode = _currentNode->next();
+			_currentNode = _currentNode->next;
 			return _currentNode;
 		}
 		return nullptr;
 	}
 
+	bool operator!=(const Iterator& other) const {
+		return _currentNode != other._currentNode;
+	}
+
+private:
+
+	_ptrNode _currentNode;
 
 };
 

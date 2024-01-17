@@ -7,7 +7,7 @@ public:
 
 	using _ptrNode = Node<T>*;
 	
-	Node();
+	Node(T value);
 	~Node();
 
 
@@ -39,8 +39,8 @@ public:
 
 	// proprties
 	__declspec(property(get = GetData, put = SetData)) T data;
-	__declspec(property(get = GetNext, put = SetNext)) T next;
-	__declspec(property(get = GetPrev, put = SetPrev)) T prev;
+	__declspec(property(get = GetNext, put = SetNext)) _ptrNode next;
+	__declspec(property(get = GetPrev, put = SetPrev)) _ptrNode prev;
 
 
 
@@ -57,10 +57,7 @@ private:
 
 
 template<typename T>
-Node<T>::Node()
-{
-
-}
+Node<T>::Node(T value) :_data(value) {}
 
 
 template<typename T>
