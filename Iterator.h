@@ -8,7 +8,7 @@ public:
 
 	using _ptrNode = Node<T>*;
 
-	Iterator();
+	Iterator(_ptrNode begin);
 	~Iterator();
 
 	_ptrNode GetCurrent() {
@@ -25,9 +25,13 @@ private:
 
 	_ptrNode _currentNode;
 
-	_ptrNode next() {
+	_ptrNode next(_ptrNode haed) {
 		if (!_currentNode)
 		{
+			if (_currentNode==head) // to break circular linked list and avoid infinite circular loop
+			{
+				return nullptr;
+			}
 			_currentNode = _currentNode->next();
 			return _currentNode;
 		}
@@ -38,10 +42,7 @@ private:
 };
 
 template <typename T>
-Iterator<T>::Iterator()
-{
-
-}
+Iterator<T>::Iterator(_ptrNode begin) : _currentNode(begin) {};
 
 
 template <typename T>
