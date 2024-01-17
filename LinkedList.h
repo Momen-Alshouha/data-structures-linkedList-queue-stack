@@ -44,13 +44,13 @@ public:
 	__declspec(property (get = GetLength)) size_t length;
 
 	ptrNodeItem Find(T value) {
-		for (iterator itr = _begin(); itr != _end; itr.current=itr.next(head))
+		for (iterator itr = _begin(); itr != _end(); itr.current = itr.next(head))
 		{
-			if (*itr.current==value)
+			if (itr.current->data==value)
 			{
 				return itr.current;
 			}
-		}
+		}	
 		return nullptr;
 	}
 
@@ -72,6 +72,7 @@ public:
 		ptrNodeItem NodeToFind = Find(value);
 		return (NodeToFind);
 	}
+
 	bool IsEmpty() {
 		return (_length == 0);
 	}
@@ -132,8 +133,88 @@ public:
 		_length++;
 	}
 
+	void DeleteLast() {
+		if (!IsEmpty()) {
+			if (_head == _tail) {
+				delete _head;
+				_head = _tail = nullptr;
+			}
+			else {
+				Node<T>* nodeToDelete = _tail;
+				_tail = _tail->prev;
+				_tail->next = _head; 
+				_head->prev = _tail;
+				delete nodeToDelete;
+			}
+
+			_length--;
+		}
+	}
+
+
+
+
+
+	void DeleteFirst() {
+		if (!IsEmpty()) {
+			Node<T>* newHead = _head->next;
+
+			if (newHead == _tail) {
+				_head = _tail = nullptr;
+			}
+			else {
+				_head = newHead;
+				newHead->prev = _tail;
+				_tail->next = _head;
+			}
+			_length--;
+		}
+	}
+
+	void Delete(T value) {
+		if (IsExist(value)) {
+			Node<T>* nodeToDelete = Find(value);
+
+			if (_length == 1) {
+				delete nodeToDelete;
+				_head = _tail = nullptr;
+			}
+			else {
+				if (nodeToDelete == _head) {
+					DeleteFirst();
+				}
+				else if (nodeToDelete == _tail) {
+					DeleteLast();
+				}
+				else {
+					nodeToDelete->prev->next = nodeToDelete->next;
+					nodeToDelete->next->prev = nodeToDelete->prev;
+				}
+			}
+
+			_length--;
+		}
+	}
+
+
+	void clear() {
+		while (!IsEmpty()) {
+			ptrNodeItem temp = _head;
+			_head = _head->next;
+
+			delete temp;
+			_length--;
+		}
+		_tail = _head = nullptr;
+	}
+
 
 	void print() {
+		if (IsEmpty())
+		{
+			cout << "Linked List Is Empty!\n";
+			return ;
+		}
 		for (Iterator<T> itr = _begin(); itr != _end(); itr.current = itr.next(_head)) {
 			cout << itr.current->data;
 			if (itr.current != _tail) {
@@ -159,5 +240,5 @@ LinkedList<T>::LinkedList() : _head(nullptr), _tail(nullptr) ,_length(0) {};
 template <typename T>
 LinkedList<T>::~LinkedList ()
 {
-
+	clear();
 }
