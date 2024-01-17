@@ -3,13 +3,16 @@
 int main()
 {
 	LinkedList<int> linkedlist;
-	linkedlist.InsertBegin(1);
-	linkedlist.InsertBegin(2);
-	linkedlist.InsertBegin(3);
+	
 	linkedlist.InsertEnd(10);
 	linkedlist.InsertEnd(20);
 	linkedlist.InsertEnd(30);
-
+	linkedlist.print();
+	cout << linkedlist.head->prev->data << endl;
+	cout << linkedlist.tail->next->data << endl;
+	linkedlist.InsertAt(0,99);
+	linkedlist.InsertAt(linkedlist.length, 999);
+	linkedlist.InsertAt(2, 88);
 	linkedlist.print();
 	cout << "head : " << linkedlist.head->data << endl;
 	cout << "tail : " << linkedlist.tail->data << endl;

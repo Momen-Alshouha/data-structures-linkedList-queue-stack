@@ -54,6 +54,20 @@ public:
 		return nullptr;
 	}
 
+	ptrNodeItem FindByIndex(short index) {
+		short counter = 0;
+		for (Iterator<T> itr = _begin(); itr != _end(); itr.current = itr.next(_head)) {
+			{
+				if (counter == index)
+				{
+					return itr.current;
+				}
+				counter++;
+			}
+		}
+		return nullptr;
+	}
+
 	bool IsExist(T value) {
 		ptrNodeItem NodeToFind = Find(value);
 		return (NodeToFind);
@@ -62,12 +76,34 @@ public:
 		return (_length == 0);
 	}
 
+	void InsertAt(short index, T value) {
+		if (index == 0) {
+			InsertBegin(value);
+			return;
+		}
+		else if (index == _length) {
+			InsertEnd(value);
+			return;
+		}
+		else {
+			if (index >= 1 && index < _length) {
+				ptrNodeItem NodeAtIndex = FindByIndex(index);
+				ptrNodeItem NewNode = new Node<T>(value);
+				NewNode->prev = NodeAtIndex->prev;
+				NewNode->next = NodeAtIndex;
+				NodeAtIndex->prev->next = NewNode;
+				NodeAtIndex->prev = NewNode;
+				_length++;
+			}
+		}
+	}
+
 	void InsertEnd(T value) {
 		if (_head == nullptr) {
 			ptrNodeItem NewNode = new Node<T>(value);
 			_head = _tail = NewNode;
-			_tail->next = _head; // Update the next pointer to make it circular
-			_head->prev = _tail; // Update the prev pointer to make it circular
+			_tail->next = _head;
+			_head->prev = _tail; 
 		}
 		else {
 			ptrNodeItem NewNode = new Node<T>(value);
@@ -75,7 +111,7 @@ public:
 			NewNode->prev = _tail;
 			NewNode->next = _head;
 			_tail = NewNode;
-			_head->prev = _tail; // Update the prev pointer of the head to make it circular
+			_head->prev = _tail; 
 		}
 		_length++;
 	}
@@ -91,10 +127,11 @@ public:
 			NewNode->next = _head;
 			_head->prev = NewNode;
 			_head = NewNode;
-			_tail->next = _head; 
+			_tail->next = _head;
 		}
 		_length++;
 	}
+
 
 	void print() {
 		for (Iterator<T> itr = _begin(); itr != _end(); itr.current = itr.next(_head)) {

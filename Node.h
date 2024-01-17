@@ -32,6 +32,7 @@ public:
 		return _prev;
 	}
 
+
 	_ptrNode SetPrev(_ptrNode prev) {
 		return _prev = prev;
 	}
