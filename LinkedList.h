@@ -250,6 +250,21 @@ public:
 		cout << std::endl;
 	}
 
+	void PrintInReverseOrder() {
+		if (!IsEmpty())
+		{
+			for (iterator itr = iterator(_tail); itr != _head; )
+			{
+				cout << itr.current->data;
+				if (itr.current != _head) {
+					cout << " -> ";
+				}
+				itr.current = itr.current->prev;
+			}
+			cout << _head->data << endl;
+		}
+	}
+
 private:
 
 	ptrNodeItem _head;

@@ -29,4 +29,5 @@ int main()
 	linkedlist.update(199, 888);
 	linkedlist.update(99, 888);
 	linkedlist.print();
+	linkedlist.PrintInReverseOrder();
 }
