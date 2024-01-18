@@ -21,6 +21,10 @@ int main()
 	cout << "head : " << linkedlist.head->data << endl;
 	cout << "tail : " << linkedlist.tail->data << endl;
 	cout<<"Length : "<<linkedlist.length << endl;
-	linkedlist.clear();
 	linkedlist.print();
+
+	cout << "\n**************************\n";
+	linkedlist.reverse();
+	linkedlist.print();
+
 }

@@ -208,6 +208,26 @@ public:
 		_tail = _head = nullptr;
 	}
 
+	void reverse() {
+		if (_length > 1) {
+			Node<T>* tempHead = _head;
+			do
+			{
+				Node<T>* temp = tempHead->next;
+				tempHead->next = tempHead->prev;
+				tempHead->prev = temp;
+
+				tempHead = tempHead->next;
+
+			} while (tempHead != _head);
+		
+			Node<T>* temp = _head;
+			_head = _tail;
+			_tail = temp;
+		}
+
+	}
+
 
 	void print() {
 		if (IsEmpty())
