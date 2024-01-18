@@ -26,5 +26,7 @@ int main()
 	cout << "\n**************************\n";
 	linkedlist.reverse();
 	linkedlist.print();
-
+	linkedlist.update(199, 888);
+	linkedlist.update(99, 888);
+	linkedlist.print();
 }

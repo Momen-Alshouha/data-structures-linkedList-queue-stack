@@ -225,9 +225,15 @@ public:
 			_head = _tail;
 			_tail = temp;
 		}
-
 	}
 
+	void update(T value,T newValue) {
+		if (IsExist(value))
+		{
+
+			Find(value)->data = newValue;
+		}
+	}
 
 	void print() {
 		if (IsEmpty())
