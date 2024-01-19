@@ -1,9 +1,18 @@
 #include "LinkedList.h"
 #include "Queue.h"
+#include "Stack.h"
 
 int main()
 {
-	Queue<int> queue,q2;
+	Stack<int> stack;
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+	stack.print();
+	stack.pop();
+	stack.print();
+
+	/*Queue<int> queue,q2;
 	
 	queue.enqueue(1); 
 	queue.enqueue(2);	
@@ -13,8 +22,8 @@ int main()
 	queue.print();
 	cout << queue.size() << endl;
 	cout << queue.Front << endl;
-	cout << queue.size() << endl;
-	cout << (queue == q2) << endl;
+	cout << queue.size() << endl;*/
+
 	//LinkedList<int> linkedlist;
 	//
 	//linkedlist.InsertEnd(10);
